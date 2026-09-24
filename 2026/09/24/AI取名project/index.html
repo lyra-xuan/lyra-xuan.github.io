@@ -1,0 +1,486 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>AI取名全栈项目实战 | Lyra</title><meta name="author" content="lyra,3098595797@qq.com"><meta name="copyright" content="lyra"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基于 FastAPI + uni-app(Vue3) 的 AI 智能取名服务，采用前后端分离架构，支持 H5 &#x2F; Android APK &#x2F; 微信小程序 多端发布，完整实现用户鉴权、邮箱验证码注册、AI 大模型取名等功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI取名全栈项目实战">
+<meta property="og:url" content="https://lyra-xuan.github.io/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/index.html">
+<meta property="og:site_name" content="Lyra">
+<meta property="og:description" content="基于 FastAPI + uni-app(Vue3) 的 AI 智能取名服务，采用前后端分离架构，支持 H5 &#x2F; Android APK &#x2F; 微信小程序 多端发布，完整实现用户鉴权、邮箱验证码注册、AI 大模型取名等功能。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lyra-xuan.github.io/img/130309636_p0_master1200.jpg">
+<meta property="article:published_time" content="2026-09-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-24T08:14:20.455Z">
+<meta property="article:author" content="lyra">
+<meta property="article:tag" content="全栈项目,FastAPI,uni-app,Vue3,MySQL,Alembic,SQLAlchemy,AI,DeepSeek">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lyra-xuan.github.io/img/130309636_p0_master1200.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AI取名全栈项目实战",
+  "url": "https://lyra-xuan.github.io/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/",
+  "image": "https://lyra-xuan.github.io/img/130309636_p0_master1200.jpg",
+  "datePublished": "2026-09-23T16:00:00.000Z",
+  "dateModified": "2026-09-24T08:14:20.455Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "lyra",
+      "url": "https://lyra-xuan.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lyra-xuan.github.io/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'AI取名全栈项目实战',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/112649969_p0.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/b_024f11db813b625ac1a6e44407af7526.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/130309636_p0_master1200.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Lyra</span></a><a class="nav-page-title" href="/"><span class="site-name">AI取名全栈项目实战</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">AI取名全栈项目实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-09-23T16:00:00.000Z" title="发表于 2026-09-24 00:00:00">2026-09-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-09-24T08:14:20.455Z" title="更新于 2026-09-24 16:14:20">2026-09-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/">实战项目</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h1><p>AI取名服务是一个前后端分离的全栈应用：用户通过邮箱验证码完成注册登录后，填写姓氏、性别、名字字数、风格偏好等参数，后端调用 DeepSeek 大模型生成包含名字拼音、寓意、评分等结构化信息的取名结果。一套前端代码可同时发布为 H5 网页、Android APK 安装包、微信小程序。</p>
+<ul>
+<li>博客地址：<a target="_blank" rel="noopener" href="https://lyra.cfd/">Lyra’s Blog</a></li>
+<li>项目地址：<a target="_blank" rel="noopener" href="https://github.com/lyra-xuan/AI_naming">lyra-xuan&#x2F;AI_naming</a></li>
+<li>参考文档：<a target="_blank" rel="noopener" href="https://www.yuque.com/hynever/rd5ufc#">AI取名项目实战</a></li>
+</ul>
+<hr>
+<h1 id="功能概览"><a href="#功能概览" class="headerlink" title="功能概览"></a>功能概览</h1><ul>
+<li><strong>前端页面</strong>：注册、登录、取名主界面（参数表单 + 结果卡片列表）</li>
+<li><strong>后端 API</strong>：邮箱验证码发送、用户注册、登录鉴权、刷新 Token、AI 取名</li>
+<li><strong>用户体系</strong>：JWT 双 Token 鉴权（access + refresh）、邮箱验证码注册、密码哈希存储</li>
+<li><strong>AI 能力</strong>：接入 DeepSeek 大模型，通过 Prompt 工程约束输出结构化 JSON（名字 + 拼音 + 寓意 + 评分）</li>
+<li><strong>工程化</strong>：环境变量密钥管理、Alembic 数据库迁移、依赖清单、.gitignore 规范</li>
+</ul>
+<hr>
+<h1 id="技术栈选型"><a href="#技术栈选型" class="headerlink" title="技术栈选型"></a>技术栈选型</h1><h2 id="后端-Python"><a href="#后端-Python" class="headerlink" title="后端 (Python)"></a>后端 (Python)</h2><table>
+<thead>
+<tr>
+<th>技术</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>FastAPI</strong></td>
+<td>Web 框架</td>
+<td>自动生成 Swagger 文档 &#x2F; 异步支持 &#x2F; Pydantic 参数校验</td>
+</tr>
+<tr>
+<td><strong>SQLAlchemy 异步版</strong></td>
+<td>ORM</td>
+<td><code>select()</code> &#x2F; <code>session.execute()</code> 异步操作 DB</td>
+</tr>
+<tr>
+<td><strong>Alembic</strong></td>
+<td>数据库迁移</td>
+<td><code>alembic revision --autogenerate</code> 生成版本脚本</td>
+</tr>
+<tr>
+<td><strong>aiomysql</strong></td>
+<td>MySQL 异步驱动</td>
+<td>配合 SQLAlchemy async</td>
+</tr>
+<tr>
+<td><strong>PyJWT</strong></td>
+<td>JWT 鉴权</td>
+<td>access_token + refresh_token 双 Token 机制</td>
+</tr>
+<tr>
+<td><strong>Pydantic v2</strong></td>
+<td>请求&#x2F;响应 Schema</td>
+<td>自动校验参数类型、长度、枚举值</td>
+</tr>
+<tr>
+<td><strong>smtplib + email</strong></td>
+<td>发送邮箱验证码</td>
+<td>用 QQ 邮箱 SMTP 服务（授权码模式）</td>
+</tr>
+<tr>
+<td><strong>httpx</strong></td>
+<td>异步 HTTP 客户端</td>
+<td>调用 DeepSeek API</td>
+</tr>
+</tbody></table>
+<h2 id="前端-uni-app-Vue3"><a href="#前端-uni-app-Vue3" class="headerlink" title="前端 (uni-app + Vue3)"></a>前端 (uni-app + Vue3)</h2><table>
+<thead>
+<tr>
+<th>技术</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>uni-app</strong></td>
+<td>跨端框架</td>
+<td>一套代码 → H5 &#x2F; 安卓 APK &#x2F; 微信小程序</td>
+</tr>
+<tr>
+<td><strong>Vue 3 Composition API</strong></td>
+<td>前端框架</td>
+<td><code>&lt;script setup&gt;</code> 写法</td>
+</tr>
+<tr>
+<td><strong>Vite</strong></td>
+<td>构建工具</td>
+<td><code>npm run dev:h5</code> 启动开发服务器</td>
+</tr>
+<tr>
+<td><strong>uni.request</strong></td>
+<td>网络请求</td>
+<td>统一封装在 <code>http/http.js</code>，自动带 Token</td>
+</tr>
+</tbody></table>
+<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><table>
+<thead>
+<tr>
+<th>工具</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Git + GitHub</strong></td>
+<td>版本控制 &#x2F; 代码托管</td>
+</tr>
+<tr>
+<td><strong>.gitignore</strong></td>
+<td>过滤密钥&#x2F;环境&#x2F;依赖</td>
+</tr>
+<tr>
+<td><strong>.env + .env.example</strong></td>
+<td>环境变量</td>
+</tr>
+<tr>
+<td><strong>requirements.txt</strong></td>
+<td>Python 依赖清单</td>
+</tr>
+<tr>
+<td><strong>package-lock.json</strong></td>
+<td>前端依赖锁版本</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="项目结构（分层架构）"><a href="#项目结构（分层架构）" class="headerlink" title="项目结构（分层架构）"></a>项目结构（分层架构）</h1><p>后端参考了经典「MVC &#x2F; 分层架构」，职责切分很清晰：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">AI_naming/</span><br><span class="line">├── FastAPIProject_zhiliao/          # 后端</span><br><span class="line">│   ├── main.py                      # FastAPI 入口（CORS 中间件、路由注册）</span><br><span class="line">│   ├── dependencies.py              # 全局依赖注入（DB Session）</span><br><span class="line">│   ├── requirements.txt             # 依赖清单</span><br><span class="line">│   ├── .env.example                 # 环境变量模板（公开）</span><br><span class="line">│   ├── .env                         # 真实配置（不提交！）</span><br><span class="line">│   ├── alembic/                     # Alembic 迁移脚本</span><br><span class="line">│   │   └── versions/</span><br><span class="line">│   │       └── 3ce86ebd9115_init.py</span><br><span class="line">│   ├── alembic.ini</span><br><span class="line">│   ├── routers/                     # 路由层（只处理 HTTP 收发包）</span><br><span class="line">│   │   ├── auth_router.py           # 注册/登录/验证码/刷新Token</span><br><span class="line">│   │   └── name_router.py           # AI 取名</span><br><span class="line">│   ├── core/                        # 业务核心层</span><br><span class="line">│   │   ├── auth.py                  # JWT 签发/校验/鉴权依赖</span><br><span class="line">│   │   ├── agent.py                 # DeepSeek Prompt 封装 / 异步调用</span><br><span class="line">│   │   └── mail.py                  # SMTP 邮件发送（验证码）</span><br><span class="line">│   ├── models/                      # ORM 模型层（SQLAlchemy）</span><br><span class="line">│   │   ├── user.py</span><br><span class="line">│   │   └── auth_codes.py</span><br><span class="line">│   ├── repository/                  # 数据访问层（只做 SQL，不碰业务）</span><br><span class="line">│   │   ├── user_repo.py</span><br><span class="line">│   │   └── auth_codes_repo.py</span><br><span class="line">│   ├── schemas/                     # Pydantic Schema（请求/响应契约）</span><br><span class="line">│   │   ├── user.py                  # 注册/登录参数</span><br><span class="line">│   │   ├── auth.py                  # Token 结构</span><br><span class="line">│   │   └── name.py                  # 取名请求/响应</span><br><span class="line">│   └── settings/</span><br><span class="line">│       └── __init__.py              # 统一从 .env 读配置</span><br><span class="line">│</span><br><span class="line">└── take_a_name/                     # 前端 uni-app (Vue3)</span><br><span class="line">    ├── package.json</span><br><span class="line">    ├── vite.config.js</span><br><span class="line">    ├── index.html</span><br><span class="line">    └── src/</span><br><span class="line">        ├── App.vue</span><br><span class="line">        ├── main.js</span><br><span class="line">        ├── manifest.json            # uni-app 多端配置（AppID / 权限）</span><br><span class="line">        ├── pages.json               # 路由表（登录/注册/首页）</span><br><span class="line">        ├── uni.scss</span><br><span class="line">        ├── static/</span><br><span class="line">        │   └── logo.png</span><br><span class="line">        ├── http/</span><br><span class="line">        │   └── http.js              # 统一请求封装（BASE_URL + Token 注入）</span><br><span class="line">        └── pages/</span><br><span class="line">            ├── login/login.vue      # 登录页</span><br><span class="line">            ├── register/register.vue# 注册页（获取验证码）</span><br><span class="line">            └── index/index.vue      # 取名主页（表单 + 生成结果卡片）</span><br></pre></td></tr></table></figure>
+
+<h3 id="各层职责边界"><a href="#各层职责边界" class="headerlink" title="各层职责边界"></a>各层职责边界</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP 请求</span><br><span class="line">   ↓</span><br><span class="line">routers（路由层） ：参数接收 + 调用业务层 + 构造响应返回</span><br><span class="line">   ↓</span><br><span class="line">core（业务核心层）：业务流程编排，如生成验证码→持久化→发送邮件</span><br><span class="line">   ↓</span><br><span class="line">repository（DAO层）：仅负责数据库 CRUD，不包含业务判断</span><br><span class="line">   ↓</span><br><span class="line">models / schemas / DB</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="核心功能实现要点"><a href="#核心功能实现要点" class="headerlink" title="核心功能实现要点"></a>核心功能实现要点</h1><h2 id="1-用户体系：邮箱验证码注册-JWT-双-Token"><a href="#1-用户体系：邮箱验证码注册-JWT-双-Token" class="headerlink" title="1. 用户体系：邮箱验证码注册 + JWT 双 Token"></a>1. 用户体系：邮箱验证码注册 + JWT 双 Token</h2><h3 id="注册流程"><a href="#注册流程" class="headerlink" title="注册流程"></a>注册流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">前端 GET /auth/code?email=xxx</span><br><span class="line">    ↓</span><br><span class="line">后端生成 4 位数字验证码</span><br><span class="line">    ↓</span><br><span class="line">1) ORM 写 auth_codes 表（存验证码+过期时间）</span><br><span class="line">2) SMTP 给用户邮箱发验证码（开发时直接 print 到控制台）</span><br><span class="line">    ↓</span><br><span class="line">前端 POST /auth/register（邮箱、用户名、密码、验证码）</span><br><span class="line">    ↓</span><br><span class="line">后端校验：验证码是否存在 + 未过期 + 没被用过 + 邮箱未注册</span><br><span class="line">    ↓</span><br><span class="line">密码用 hashlib.sha256 哈希后写 users 表 ✅</span><br></pre></td></tr></table></figure>
+
+<h3 id="JWT-双-Token（access-refresh）"><a href="#JWT-双-Token（access-refresh）" class="headerlink" title="JWT 双 Token（access + refresh）"></a>JWT 双 Token（access + refresh）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># settings/__init__.py</span></span><br><span class="line">JWT_ACCESS_KEY = os.getenv(<span class="string">&quot;JWT_ACCESS_KEY&quot;</span>)</span><br><span class="line">JWT_REFRESH_KEY = os.getenv(<span class="string">&quot;JWT_REFRESH_KEY&quot;</span>)</span><br><span class="line">JWT_ACCESS_EXPIRE_MINUTES = <span class="number">60</span> * <span class="number">24</span> * <span class="number">15</span>  <span class="comment"># 15 天</span></span><br><span class="line">JWT_REFRESH_EXPIRE_MINUTES = <span class="number">60</span> * <span class="number">24</span> * <span class="number">30</span>  <span class="comment"># 30 天</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>有效期</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>access_token</td>
+<td>15 天</td>
+<td>每次请求接口都带这个</td>
+</tr>
+<tr>
+<td>refresh_token</td>
+<td>30 天</td>
+<td>access 过期了用它换一个新的</td>
+</tr>
+</tbody></table>
+<p>鉴权依赖用 FastAPI 的 <code>Depends</code>，写一次到处用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># routers/name_router.py</span></span><br><span class="line"><span class="meta">@router.post(<span class="params"><span class="string">&quot;/&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">take_names</span>(<span class="params"></span></span><br><span class="line"><span class="params">    req: NameRequest,</span></span><br><span class="line"><span class="params">    db: AsyncSession = Depends(<span class="params">get_db</span>),</span></span><br><span class="line"><span class="params">    user_id: <span class="built_in">int</span> = Depends(<span class="params">auth_handler.auth_access_dependency</span>)  <span class="comment"># 自动鉴权</span></span></span><br><span class="line"><span class="params"></span>):</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-AI-取名：DeepSeek-Prompt-工程"><a href="#2-AI-取名：DeepSeek-Prompt-工程" class="headerlink" title="2. AI 取名：DeepSeek + Prompt 工程"></a>2. AI 取名：DeepSeek + Prompt 工程</h2><p>为保证大模型输出结果可被 Pydantic 稳定解析，在 Prompt 中加入以下输出约束，并通过 httpx 异步调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">用户画像：精通姓名学的国学大师，擅长根据生辰八字和五行取名</span><br><span class="line">输出约束：</span><br><span class="line">1. 严格 JSON 数组格式，不包含额外解释文字或 ```json 代码块</span><br><span class="line">2. 每个对象必须包含字段：name, pinyin, meaning, score(0-100)</span><br><span class="line">3. 输出 10 个结果，按 score 倒序</span><br><span class="line">4. 名字中不得出现 exclude 字段中列出的字</span><br></pre></td></tr></table></figure>
+
+<p>响应解析使用 Pydantic <code>model_validate_json</code> 直接转换，解析失败时进行重试。</p>
+<h2 id="3-前后端联调：CORS-跨域处理"><a href="#3-前后端联调：CORS-跨域处理" class="headerlink" title="3. 前后端联调：CORS 跨域处理"></a>3. 前后端联调：CORS 跨域处理</h2><p>前端开发服务器（Vite）运行于 <code>5173</code> 端口，后端运行于 <code>8000</code> 端口，由于端口不同浏览器视为跨域请求。浏览器对非简单请求会先发送 <code>OPTIONS</code> 预检请求，若后端未响应 CORS 头，前端请求直接被拦截。</p>
+<p>在 <code>main.py</code> 中添加 FastAPI 官方 CORS 中间件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fastapi.middleware.cors <span class="keyword">import</span> CORSMiddleware</span><br><span class="line"></span><br><span class="line">app.add_middleware(</span><br><span class="line">    CORSMiddleware,</span><br><span class="line">    allow_origins=[<span class="string">&quot;*&quot;</span>],           <span class="comment"># 生产环境改为指定域名</span></span><br><span class="line">    allow_credentials=<span class="literal">True</span>,</span><br><span class="line">    allow_methods=[<span class="string">&quot;*&quot;</span>],</span><br><span class="line">    allow_headers=[<span class="string">&quot;*&quot;</span>],</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="工程化改造与注意事项"><a href="#工程化改造与注意事项" class="headerlink" title="工程化改造与注意事项"></a>工程化改造与注意事项</h1><h2 id="密钥管理：从硬编码到环境变量"><a href="#密钥管理：从硬编码到环境变量" class="headerlink" title="密钥管理：从硬编码到环境变量"></a>密钥管理：从硬编码到环境变量</h2><p>代码中的敏感信息（数据库密码、SMTP 授权码、JWT 密钥、API Key 等）不得直接写入源代码文件，统一通过环境变量注入。</p>
+<p>改造步骤：</p>
+<ol>
+<li>安装 <code>python-dotenv</code></li>
+<li>新建 <code>.env</code>（存放本地真实配置）与 <code>.env.example</code>（公开占位模板）</li>
+<li>在 <code>.gitignore</code> 中加入 <code>.env</code>，确保不会提交到仓库</li>
+<li><code>settings/__init__.py</code> 中通过 <code>os.getenv(&quot;KEY&quot;, &quot;fallback&quot;)</code> 读取</li>
+<li>业务模块从 <code>settings</code> 统一导入配置，避免多处散落</li>
+</ol>
+<h2 id="其他工程化规范"><a href="#其他工程化规范" class="headerlink" title="其他工程化规范"></a>其他工程化规范</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>依赖管理</td>
+<td>后端虚拟环境中执行 <code>pip freeze &gt; requirements.txt</code></td>
+</tr>
+<tr>
+<td>文件忽略</td>
+<td><code>.gitignore</code> 加入 Python &#x2F; Node.js &#x2F; JetBrains 规则</td>
+</tr>
+<tr>
+<td>副作用接口 HTTP 方法</td>
+<td>发送验证码等写操作使用 POST 方法，避免误用 GET</td>
+</tr>
+<tr>
+<td>前端模块路径</td>
+<td>使用 <code>@/xxx</code> 别名代替绝对路径，避免目录调整后 import 失效</td>
+</tr>
+<tr>
+<td>构建模板语法</td>
+<td>Vite 构建下不要使用 webpack 的 <code>&lt;%= %&gt;</code> 语法</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="本地运行步骤（速查版）"><a href="#本地运行步骤（速查版）" class="headerlink" title="本地运行步骤（速查版）"></a>本地运行步骤（速查版）</h1><p><strong>前置条件</strong>：MySQL 已启动并创建数据库 <code>zhiliao_ainame</code>；Node.js ≥ 18；Python ≥ 3.10。</p>
+<h2 id="终端-1：启动后端"><a href="#终端-1：启动后端" class="headerlink" title="终端 1：启动后端"></a>终端 1：启动后端</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> FastAPIProject_zhiliao</span><br><span class="line"><span class="comment"># 1. 配置环境变量</span></span><br><span class="line"><span class="built_in">copy</span> .env.example .env        <span class="comment"># 填入真实密钥</span></span><br><span class="line"><span class="comment"># 2. 虚拟环境 + 依赖</span></span><br><span class="line">python <span class="literal">-m</span> venv .venv</span><br><span class="line">.venv\Scripts\Activate.ps1</span><br><span class="line">pip install <span class="literal">-r</span> requirements.txt</span><br><span class="line"><span class="comment"># 3. 跑数据库迁移（建表）</span></span><br><span class="line">alembic upgrade head</span><br><span class="line"><span class="comment"># 4. 启动</span></span><br><span class="line">uvicorn main:app <span class="literal">--reload</span> <span class="literal">--host</span> <span class="number">0.0</span>.<span class="number">0.0</span> <span class="literal">--port</span> <span class="number">8000</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="终端-2：启动前端"><a href="#终端-2：启动前端" class="headerlink" title="终端 2：启动前端"></a>终端 2：启动前端</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> take_a_name</span><br><span class="line">npm install</span><br><span class="line">npm run dev:h5                <span class="comment"># Vite 默认 5173 端口</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><table>
+<thead>
+<tr>
+<th>地址</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="http://localhost:5173/">http://localhost:5173/</a></td>
+<td>前端页面</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://localhost:8000/docs">http://localhost:8000/docs</a></td>
+<td>Swagger 接口文档（调试 API 最方便）</td>
+</tr>
+</tbody></table>
+<hr>
+<h1 id="部署与打包"><a href="#部署与打包" class="headerlink" title="部署与打包"></a>部署与打包</h1><p>uni-app 一套代码支持多端发布，以下是三种常用方案：</p>
+<h2 id="方案一：H5-网页部署（服务器）"><a href="#方案一：H5-网页部署（服务器）" class="headerlink" title="方案一：H5 网页部署（服务器）"></a>方案一：H5 网页部署（服务器）</h2><ol>
+<li>前端构建：<code>npm run build:h5</code> → 生成静态文件目录 <code>dist/build/h5/</code></li>
+<li>后端部署：上传 <code>FastAPIProject_zhiliao/</code> 到云服务器，使用 Gunicorn + UvicornWorker 启动</li>
+<li>Nginx 反向代理配置：<ul>
+<li><code>yourdomain.com/</code> → 前端静态资源目录</li>
+<li>API 路径 → 转发至本机 <code>127.0.0.1:8000</code></li>
+</ul>
+</li>
+<li>生产环境调整：<code>http.js</code> 的 BASE_URL 修改为正式域名；CORS <code>allow_origins</code> 收紧为指定域名</li>
+</ol>
+<h2 id="方案二：打包为-Android-APK"><a href="#方案二：打包为-Android-APK" class="headerlink" title="方案二：打包为 Android APK"></a>方案二：打包为 Android APK</h2><ol>
+<li>注册 <a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/">DCloud 开发者中心</a>，创建应用获取 AppID</li>
+<li>在 <code>manifest.json</code> 中填入 AppID 与应用名称</li>
+<li>将 <code>http.js</code> 中的 BASE_URL 改为服务器公网地址（移动端 127.0.0.1 指向设备本身）</li>
+<li>下载 HBuilderX 并登录相同账号，打开 <code>take_a_name</code> 工程目录</li>
+<li>菜单路径：发行 → 原生App-云打包 → 勾选 Android + 使用公共测试证书</li>
+<li>等待构建完成后下载 <code>.apk</code> 文件，传输至安卓设备安装</li>
+</ol>
+<blockquote>
+<p>暂无服务器时，可使用 cpolar &#x2F; 花生壳等内网穿透工具将本地 8000 端口暴露至公网进行测试。</p>
+</blockquote>
+<h2 id="方案三：微信小程序"><a href="#方案三：微信小程序" class="headerlink" title="方案三：微信小程序"></a>方案三：微信小程序</h2><ol>
+<li>在 <code>manifest.json</code> 中填入微信小程序 AppID</li>
+<li>HBuilderX 菜单：发行 → 小程序-微信</li>
+<li>使用微信开发者工具打开生成目录 <code>dist/dev/mp-weixin/</code> 进行预览与上传</li>
+</ol>
+<hr>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/lyra-xuan/AI_naming">lyra-xuan&#x2F;AI_naming</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lyra-xuan.github.io">lyra</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lyra-xuan.github.io/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/">https://lyra-xuan.github.io/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://lyra-xuan.github.io" target="_blank">Lyra</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%85%A8%E6%A0%88%E9%A1%B9%E7%9B%AE-FastAPI-uni-app-Vue3-MySQL-Alembic-SQLAlchemy-AI-DeepSeek/">全栈项目,FastAPI,uni-app,Vue3,MySQL,Alembic,SQLAlchemy,AI,DeepSeek</a></div><div class="post-share"><div class="social-share" data-image="/img/130309636_p0_master1200.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/09/15/mysql/" title="MySQL 基础速查"><img class="cover" src="/img/134265543_p0_master1200.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">MySQL 基础速查</div></div><div class="info-2"><div class="info-item-1">MySQL 基础语法速查手册（忘记语法时直接查阅）</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/b_024f11db813b625ac1a6e44407af7526.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">lyra</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyra-xuan"><i class="fab fa-github"></i><span>Follow Me on GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lyra-xuan" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=3098595797@" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到lyra的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">项目简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%A6%82%E8%A7%88"><span class="toc-number">2.</span> <span class="toc-text">功能概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E6%A0%88%E9%80%89%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">技术栈选型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF-Python"><span class="toc-number">3.1.</span> <span class="toc-text">后端 (Python)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF-uni-app-Vue3"><span class="toc-number">3.2.</span> <span class="toc-text">前端 (uni-app + Vue3)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="toc-number">3.3.</span> <span class="toc-text">工程化</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%EF%BC%88%E5%88%86%E5%B1%82%E6%9E%B6%E6%9E%84%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">项目结构（分层架构）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E8%81%8C%E8%B4%A3%E8%BE%B9%E7%95%8C"><span class="toc-number">4.0.1.</span> <span class="toc-text">各层职责边界</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E8%A6%81%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">核心功能实现要点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%94%A8%E6%88%B7%E4%BD%93%E7%B3%BB%EF%BC%9A%E9%82%AE%E7%AE%B1%E9%AA%8C%E8%AF%81%E7%A0%81%E6%B3%A8%E5%86%8C-JWT-%E5%8F%8C-Token"><span class="toc-number">5.1.</span> <span class="toc-text">1. 用户体系：邮箱验证码注册 + JWT 双 Token</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E6%B5%81%E7%A8%8B"><span class="toc-number">5.1.1.</span> <span class="toc-text">注册流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JWT-%E5%8F%8C-Token%EF%BC%88access-refresh%EF%BC%89"><span class="toc-number">5.1.2.</span> <span class="toc-text">JWT 双 Token（access + refresh）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-AI-%E5%8F%96%E5%90%8D%EF%BC%9ADeepSeek-Prompt-%E5%B7%A5%E7%A8%8B"><span class="toc-number">5.2.</span> <span class="toc-text">2. AI 取名：DeepSeek + Prompt 工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%89%8D%E5%90%8E%E7%AB%AF%E8%81%94%E8%B0%83%EF%BC%9ACORS-%E8%B7%A8%E5%9F%9F%E5%A4%84%E7%90%86"><span class="toc-number">5.3.</span> <span class="toc-text">3. 前后端联调：CORS 跨域处理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%8C%96%E6%94%B9%E9%80%A0%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">6.</span> <span class="toc-text">工程化改造与注意事项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86%EF%BC%9A%E4%BB%8E%E7%A1%AC%E7%BC%96%E7%A0%81%E5%88%B0%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">6.1.</span> <span class="toc-text">密钥管理：从硬编码到环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%B7%A5%E7%A8%8B%E5%8C%96%E8%A7%84%E8%8C%83"><span class="toc-number">6.2.</span> <span class="toc-text">其他工程化规范</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E6%AD%A5%E9%AA%A4%EF%BC%88%E9%80%9F%E6%9F%A5%E7%89%88%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">本地运行步骤（速查版）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF-1%EF%BC%9A%E5%90%AF%E5%8A%A8%E5%90%8E%E7%AB%AF"><span class="toc-number">7.1.</span> <span class="toc-text">终端 1：启动后端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E7%AB%AF-2%EF%BC%9A%E5%90%AF%E5%8A%A8%E5%89%8D%E7%AB%AF"><span class="toc-number">7.2.</span> <span class="toc-text">终端 2：启动前端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE"><span class="toc-number">7.3.</span> <span class="toc-text">访问</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%89%93%E5%8C%85"><span class="toc-number">8.</span> <span class="toc-text">部署与打包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9AH5-%E7%BD%91%E9%A1%B5%E9%83%A8%E7%BD%B2%EF%BC%88%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89"><span class="toc-number">8.1.</span> <span class="toc-text">方案一：H5 网页部署（服务器）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A%E6%89%93%E5%8C%85%E4%B8%BA-Android-APK"><span class="toc-number">8.2.</span> <span class="toc-text">方案二：打包为 Android APK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89%EF%BC%9A%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="toc-number">8.3.</span> <span class="toc-text">方案三：微信小程序</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/" title="AI取名全栈项目实战"><img src="/img/130309636_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AI取名全栈项目实战"/></a><div class="content"><a class="title" href="/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/" title="AI取名全栈项目实战">AI取名全栈项目实战</a><time datetime="2026-09-23T16:00:00.000Z" title="发表于 2026-09-24 00:00:00">2026-09-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/15/mysql/" title="MySQL 基础速查"><img src="/img/134265543_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL 基础速查"/></a><div class="content"><a class="title" href="/2026/09/15/mysql/" title="MySQL 基础速查">MySQL 基础速查</a><time datetime="2026-09-14T16:00:00.000Z" title="发表于 2026-09-15 00:00:00">2026-09-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/29/py%E8%BF%9B%E9%98%B6/" title="Python 进阶速查"><img src="/img/112510395_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 进阶速查"/></a><div class="content"><a class="title" href="/2026/07/29/py%E8%BF%9B%E9%98%B6/" title="Python 进阶速查">Python 进阶速查</a><time datetime="2026-07-28T16:00:00.000Z" title="发表于 2026-07-29 00:00:00">2026-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/26/Leetcode_Hot%20100/" title="Leetcode Hot 100"><img src="/img/131149683_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode Hot 100"/></a><div class="content"><a class="title" href="/2026/07/26/Leetcode_Hot%20100/" title="Leetcode Hot 100">Leetcode Hot 100</a><time datetime="2026-07-25T16:00:00.000Z" title="发表于 2026-07-26 00:00:00">2026-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/25/git/" title="Git入门"><img src="/img/130309636_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git入门"/></a><div class="content"><a class="title" href="/2026/07/25/git/" title="Git入门">Git入门</a><time datetime="2026-07-24T16:00:00.000Z" title="发表于 2026-07-25 00:00:00">2026-07-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/130309636_p0_master1200.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By lyra</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.6.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.6.1"></script><script src="/js/main.js?v=5.6.1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

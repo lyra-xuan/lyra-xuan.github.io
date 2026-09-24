@@ -1,0 +1,427 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python 进阶速查 | Lyra</title><meta name="author" content="lyra,3098595797@qq.com"><meta name="copyright" content="lyra"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python 进阶语法速查手册">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 进阶速查">
+<meta property="og:url" content="https://lyra-xuan.github.io/2026/07/29/py%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="Lyra">
+<meta property="og:description" content="Python 进阶语法速查手册">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://lyra-xuan.github.io/img/112510395_p0.jpg">
+<meta property="article:published_time" content="2026-07-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-09-24T08:10:05.037Z">
+<meta property="article:author" content="lyra">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lyra-xuan.github.io/img/112510395_p0.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Python 进阶速查",
+  "url": "https://lyra-xuan.github.io/2026/07/29/py%E8%BF%9B%E9%98%B6/",
+  "image": "https://lyra-xuan.github.io/img/112510395_p0.jpg",
+  "datePublished": "2026-07-28T16:00:00.000Z",
+  "dateModified": "2026-09-24T08:10:05.037Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "lyra",
+      "url": "https://lyra-xuan.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://lyra-xuan.github.io/2026/07/29/py%E8%BF%9B%E9%98%B6/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python 进阶速查',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      if ($loadingBox.classList.contains('loaded')) return
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+
+  if (document.readyState === 'complete') {
+    preloader.endLoading()
+  } else {
+    window.addEventListener('load', preloader.endLoading)
+    document.addEventListener('DOMContentLoaded', preloader.endLoading)
+    // Add timeout protection: force end after 7 seconds
+    setTimeout(preloader.endLoading, 7000)
+  }
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div class="bg-animation" id="web_bg" style="background-image: url(/img/112649969_p0.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/b_024f11db813b625ac1a6e44407af7526.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/112510395_p0.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Lyra</span></a><a class="nav-page-title" href="/"><span class="site-name">Python 进阶速查</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Python 进阶速查</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-28T16:00:00.000Z" title="发表于 2026-07-29 00:00:00">2026-07-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-09-24T08:10:05.037Z" title="更新于 2026-09-24 16:10:05">2026-09-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/">开发基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Python-进阶速查"><a href="#Python-进阶速查" class="headerlink" title="Python 进阶速查"></a>Python 进阶速查</h1><hr>
+<h2 id="1-推导式（Comprehension）"><a href="#1-推导式（Comprehension）" class="headerlink" title="1. 推导式（Comprehension）"></a>1. 推导式（Comprehension）</h2><h3 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成 [0, 1, 4, 9, 16, 25]</span></span><br><span class="line">squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6</span>)]</span><br><span class="line"><span class="comment"># 带条件：偶数的平方</span></span><br><span class="line">even_squares = [x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="字典推导式"><a href="#字典推导式" class="headerlink" title="字典推导式"></a>字典推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;0: 0, 1: 1, 2: 4, 3: 9&#125;</span></span><br><span class="line">square_dict = &#123;x: x ** <span class="number">2</span> <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>)&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="集合推导式"><a href="#集合推导式" class="headerlink" title="集合推导式"></a>集合推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 去重 + 生成集合</span></span><br><span class="line">nums = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>]&#125;</span><br><span class="line"><span class="comment"># 结果 &#123;1, 2, 3&#125;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-lambda-匿名函数"><a href="#2-lambda-匿名函数" class="headerlink" title="2. lambda 匿名函数"></a>2. lambda 匿名函数</h2><p>语法：<code>lambda 参数1, 参数2... : 表达式</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add = <span class="keyword">lambda</span> a, b: a + b</span><br><span class="line"><span class="built_in">print</span>(add(<span class="number">3</span>, <span class="number">5</span>))  <span class="comment"># 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 常和 sorted / map / filter 搭配</span></span><br><span class="line">points = [(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">5</span>, <span class="number">0</span>)]</span><br><span class="line">points.sort(key=<span class="keyword">lambda</span> p: p[<span class="number">1</span>])  <span class="comment"># 按第二个元素排序</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="3-高阶函数"><a href="#3-高阶函数" class="headerlink" title="3. 高阶函数"></a>3. 高阶函数</h2><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>map(func, iter)</code></td>
+<td>把 func 作用到每个元素</td>
+<td><code>list(map(str, [1,2,3])) → [&#39;1&#39;,&#39;2&#39;,&#39;3&#39;]</code></td>
+</tr>
+<tr>
+<td><code>filter(func, iter)</code></td>
+<td>过滤出返回 True 的元素</td>
+<td><code>list(filter(lambda x: x&gt;2, [1,2,3])) → [3]</code></td>
+</tr>
+<tr>
+<td><code>reduce(func, iter)</code></td>
+<td>累次聚合（需 from functools import reduce）</td>
+<td><code>reduce(lambda a,b:a*b, [1,2,3,4]) → 24</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="4-装饰器（Decorator）"><a href="#4-装饰器（Decorator）" class="headerlink" title="4. 装饰器（Decorator）"></a>4. 装饰器（Decorator）</h2><p>在<strong>不修改原函数代码</strong>的前提下，给函数扩展功能（日志、计时、权限校验等）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">timer</span>(<span class="params">func</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">wrapper</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line">        start = time.time()</span><br><span class="line">        result = func(*args, **kwargs)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;func.__name__&#125;</span> 耗时: <span class="subst">&#123;time.time() - start:<span class="number">.2</span>f&#125;</span>s&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">    <span class="keyword">return</span> wrapper</span><br><span class="line"></span><br><span class="line"><span class="meta">@timer          </span><span class="comment"># 等价于 slow_func = timer(slow_func)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">slow_func</span>():</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">slow_func()</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="5-模块（Module）-包（Package）"><a href="#5-模块（Module）-包（Package）" class="headerlink" title="5. 模块（Module）&amp; 包（Package）"></a>5. 模块（Module）&amp; 包（Package）</h2><h3 id="模块导入"><a href="#模块导入" class="headerlink" title="模块导入"></a>模块导入</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> join, exists</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> *   <span class="comment"># 不推荐，会污染命名空间</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="name-变量"><a href="#name-变量" class="headerlink" title="__name__ 变量"></a><code>__name__</code> 变量</h3><p>当前文件<strong>被直接运行</strong>时 <code>__name__ == &#39;__main__&#39;</code>；当模块被 import 时不等于。常用于写模块自测代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="comment"># 仅当直接运行本文件时执行，import 时不执行</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;模块自测&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="包（Package）"><a href="#包（Package）" class="headerlink" title="包（Package）"></a>包（Package）</h3><p>一个带 <code>__init__.py</code> 的文件夹就是一个包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">my_package/</span><br><span class="line">├── __init__.py   # 包初始化，可以 __all__ = [&#x27;xxx&#x27;] 控制 import *</span><br><span class="line">├── module1.py</span><br><span class="line">└── sub_package/</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    └── module2.py</span><br></pre></td></tr></table></figure>
+
+<p>调用方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> my_package <span class="keyword">import</span> module1</span><br><span class="line"><span class="keyword">from</span> my_package.sub_package <span class="keyword">import</span> module2</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="6-文件读写-I-O"><a href="#6-文件读写-I-O" class="headerlink" title="6. 文件读写 I&#x2F;O"></a>6. 文件读写 I&#x2F;O</h2><h3 id="打开模式"><a href="#打开模式" class="headerlink" title="打开模式"></a>打开模式</h3><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>r</code></td>
+<td>只读（默认）</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>只写（清空再写）</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>追加写</td>
+</tr>
+<tr>
+<td><code>rb</code> &#x2F; <code>wb</code></td>
+<td>二进制模式（图片、视频）</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>读写模式</td>
+</tr>
+</tbody></table>
+<h3 id="文件对象方法"><a href="#文件对象方法" class="headerlink" title="文件对象方法"></a>文件对象方法</h3><ul>
+<li><code>f.read()</code> - 读取内容</li>
+<li><code>f.write()</code> - 写入内容</li>
+<li><code>f.seek()</code> - 文件定位</li>
+<li><code>f.tell()</code> - 获取当前位置</li>
+<li><code>f.close()</code> - 关闭文件</li>
+</ul>
+<h3 id="with-语句（推荐）"><a href="#with-语句（推荐）" class="headerlink" title="with 语句（推荐）"></a>with 语句（推荐）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;w&quot;</span>, encoding=<span class="string">&quot;utf-8&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(<span class="string">&quot;Hello, Python!&quot;</span>)</span><br><span class="line"><span class="comment"># 文件自动关闭</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="7-OS-文件-目录方法"><a href="#7-OS-文件-目录方法" class="headerlink" title="7. OS 文件&#x2F;目录方法"></a>7. OS 文件&#x2F;目录方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>os.getcwd()</code></td>
+<td>返回当前工作目录</td>
+</tr>
+<tr>
+<td><code>os.chdir()</code></td>
+<td>改变当前工作目录</td>
+</tr>
+<tr>
+<td><code>os.listdir()</code></td>
+<td>返回目录下所有文件和子目录</td>
+</tr>
+<tr>
+<td><code>os.makedirs()</code></td>
+<td>创建目录</td>
+</tr>
+<tr>
+<td><code>os.rmdir()</code></td>
+<td>删除目录</td>
+</tr>
+<tr>
+<td><code>os.rename()</code></td>
+<td>重命名文件或目录</td>
+</tr>
+<tr>
+<td><code>os.remove()</code></td>
+<td>删除文件</td>
+</tr>
+<tr>
+<td><code>os.path.join()</code></td>
+<td>拼接路径</td>
+</tr>
+<tr>
+<td><code>os.path.exists()</code></td>
+<td>检查路径是否存在</td>
+</tr>
+<tr>
+<td><code>os.path.isdir()</code></td>
+<td>检查是否为目录</td>
+</tr>
+<tr>
+<td><code>os.path.isfile()</code></td>
+<td>检查是否为文件</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="8-错误和异常"><a href="#8-错误和异常" class="headerlink" title="8. 错误和异常"></a>8. 错误和异常</h2><h3 id="try-except-基本结构"><a href="#try-except-基本结构" class="headerlink" title="try-except 基本结构"></a>try-except 基本结构</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = <span class="number">1</span> / <span class="number">0</span></span><br><span class="line"><span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;除零错误:&quot;</span>, e)</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;其他异常:&quot;</span>, e)</span><br></pre></td></tr></table></figure>
+
+<h3 id="raise-抛出异常"><a href="#raise-抛出异常" class="headerlink" title="raise 抛出异常"></a>raise 抛出异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">divide</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">if</span> b == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">&quot;除数不能为 0&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> a / b</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义异常"><a href="#自定义异常" class="headerlink" title="自定义异常"></a>自定义异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyError</span>(<span class="title class_ inherited__">Exception</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">raise</span> MyError(<span class="string">&quot;自定义错误信息&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="9-面向对象（OOP）"><a href="#9-面向对象（OOP）" class="headerlink" title="9. 面向对象（OOP）"></a>9. 面向对象（OOP）</h2><p>参考学习资料：<a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-class.html">https://www.runoob.com/python3/python3-class.html</a></p>
+<hr>
+<h2 id="10-标准库概览（高频使用）"><a href="#10-标准库概览（高频使用）" class="headerlink" title="10. 标准库概览（高频使用）"></a>10. 标准库概览（高频使用）</h2><table>
+<thead>
+<tr>
+<th>模块名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>os</code></td>
+<td>操作系统接口，文件&#x2F;目录&#x2F;环境变量</td>
+</tr>
+<tr>
+<td><code>sys</code></td>
+<td>Python 运行时参数，如 <code>sys.argv</code> 命令行参数</td>
+</tr>
+<tr>
+<td><code>math</code></td>
+<td>数学计算，三角函数、开方、常量 π&#x2F;e</td>
+</tr>
+<tr>
+<td><code>random</code></td>
+<td>随机数，<code>random.randint / choice / shuffle</code></td>
+</tr>
+<tr>
+<td><code>datetime</code></td>
+<td>日期时间，<code>datetime.now() / strftime / timedelta</code></td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td>JSON 序列化与反序列化</td>
+</tr>
+<tr>
+<td><code>re</code></td>
+<td>正则表达式</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>时间戳，<code>time.time() / time.sleep()</code></td>
+</tr>
+</tbody></table>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://lyra-xuan.github.io">lyra</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://lyra-xuan.github.io/2026/07/29/py%E8%BF%9B%E9%98%B6/">https://lyra-xuan.github.io/2026/07/29/py%E8%BF%9B%E9%98%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://lyra-xuan.github.io" target="_blank">Lyra</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a></div><div class="post-share"><div class="social-share" data-image="/img/112510395_p0.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/09/15/mysql/" title="MySQL 基础速查"><img class="cover" src="/img/134265543_p0_master1200.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">MySQL 基础速查</div></div><div class="info-2"><div class="info-item-1">MySQL 基础语法速查手册（忘记语法时直接查阅）</div></div></div></a><a class="pagination-related" href="/2026/07/26/Leetcode_Hot%20100/" title="Leetcode Hot 100"><img class="cover" src="/img/131149683_p0_master1200.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Leetcode Hot 100</div></div><div class="info-2"><div class="info-item-1">Leetcode Hot 100</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/07/24/py%E5%9F%BA%E7%A1%80/" title="Python 基础"><img class="cover" src="/img/134265543_p0_master1200.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-07-24</div><div class="info-item-2">Python 基础</div></div><div class="info-2"><div class="info-item-1">Python 的基础部分学习（基于菜鸟教程）</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/b_024f11db813b625ac1a6e44407af7526.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">lyra</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/lyra-xuan"><i class="fab fa-github"></i><span>Follow Me on GitHub</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/lyra-xuan" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=3098595797@" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到lyra的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-%E8%BF%9B%E9%98%B6%E9%80%9F%E6%9F%A5"><span class="toc-number">1.</span> <span class="toc-text">Python 进阶速查</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8E%A8%E5%AF%BC%E5%BC%8F%EF%BC%88Comprehension%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1. 推导式（Comprehension）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">列表推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">字典推导式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">集合推导式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-lambda-%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">2. lambda 匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.</span> <span class="toc-text">3. 高阶函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E8%A3%85%E9%A5%B0%E5%99%A8%EF%BC%88Decorator%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">4. 装饰器（Decorator）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%A8%A1%E5%9D%97%EF%BC%88Module%EF%BC%89-%E5%8C%85%EF%BC%88Package%EF%BC%89"><span class="toc-number">1.5.</span> <span class="toc-text">5. 模块（Module）&amp; 包（Package）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%85%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">模块导入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name-%E5%8F%98%E9%87%8F"><span class="toc-number">1.5.2.</span> <span class="toc-text">__name__ 变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%EF%BC%88Package%EF%BC%89"><span class="toc-number">1.5.3.</span> <span class="toc-text">包（Package）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99-I-O"><span class="toc-number">1.6.</span> <span class="toc-text">6. 文件读写 I&#x2F;O</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.6.1.</span> <span class="toc-text">打开模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="toc-number">1.6.2.</span> <span class="toc-text">文件对象方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#with-%E8%AF%AD%E5%8F%A5%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">1.6.3.</span> <span class="toc-text">with 语句（推荐）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-OS-%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.7.</span> <span class="toc-text">7. OS 文件&#x2F;目录方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E9%94%99%E8%AF%AF%E5%92%8C%E5%BC%82%E5%B8%B8"><span class="toc-number">1.8.</span> <span class="toc-text">8. 错误和异常</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#try-except-%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="toc-number">1.8.1.</span> <span class="toc-text">try-except 基本结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#raise-%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="toc-number">1.8.2.</span> <span class="toc-text">raise 抛出异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="toc-number">1.8.3.</span> <span class="toc-text">自定义异常</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%EF%BC%88OOP%EF%BC%89"><span class="toc-number">1.9.</span> <span class="toc-text">9. 面向对象（OOP）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E6%A0%87%E5%87%86%E5%BA%93%E6%A6%82%E8%A7%88%EF%BC%88%E9%AB%98%E9%A2%91%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">1.10.</span> <span class="toc-text">10. 标准库概览（高频使用）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/" title="AI取名全栈项目实战"><img src="/img/130309636_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AI取名全栈项目实战"/></a><div class="content"><a class="title" href="/2026/09/24/AI%E5%8F%96%E5%90%8Dproject/" title="AI取名全栈项目实战">AI取名全栈项目实战</a><time datetime="2026-09-23T16:00:00.000Z" title="发表于 2026-09-24 00:00:00">2026-09-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/09/15/mysql/" title="MySQL 基础速查"><img src="/img/134265543_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL 基础速查"/></a><div class="content"><a class="title" href="/2026/09/15/mysql/" title="MySQL 基础速查">MySQL 基础速查</a><time datetime="2026-09-14T16:00:00.000Z" title="发表于 2026-09-15 00:00:00">2026-09-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/29/py%E8%BF%9B%E9%98%B6/" title="Python 进阶速查"><img src="/img/112510395_p0.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 进阶速查"/></a><div class="content"><a class="title" href="/2026/07/29/py%E8%BF%9B%E9%98%B6/" title="Python 进阶速查">Python 进阶速查</a><time datetime="2026-07-28T16:00:00.000Z" title="发表于 2026-07-29 00:00:00">2026-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/26/Leetcode_Hot%20100/" title="Leetcode Hot 100"><img src="/img/131149683_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Leetcode Hot 100"/></a><div class="content"><a class="title" href="/2026/07/26/Leetcode_Hot%20100/" title="Leetcode Hot 100">Leetcode Hot 100</a><time datetime="2026-07-25T16:00:00.000Z" title="发表于 2026-07-26 00:00:00">2026-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/07/25/git/" title="Git入门"><img src="/img/130309636_p0_master1200.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git入门"/></a><div class="content"><a class="title" href="/2026/07/25/git/" title="Git入门">Git入门</a><time datetime="2026-07-24T16:00:00.000Z" title="发表于 2026-07-25 00:00:00">2026-07-25</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/112510395_p0.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By lyra</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.6.1</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.6.1"></script><script src="/js/main.js?v=5.6.1"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
